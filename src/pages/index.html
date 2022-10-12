@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/style.css">
+    <script src="../scripts/counter.js" defer></script>
+    <title>Clock!</title>
+</head>
+<body>
+    <main>
+        <div id="clock">00:00:00</div>
+        <div class="container">
+            <div class="time-input-group" id="timeContainer">
+                <input tabindex="1" id="time" type="number" placeholder="hour">
+                <p>:</p>
+                <input tabindex="2" id="time" type="number" placeholder="minute">
+                <p>:</p>
+                <input tabindex="3" id="time" type="number" placeholder="second">
+                
+                <!-- Pomodoro -->
+                <input tabindex="4" class="pomodoro inactive" id="timepd" type="number" placeholder="hour">
+                <p class="pomodoro inactive">:</p>
+                <input tabindex="5" class="pomodoro inactive" id="timepd" type="number" placeholder="minute">
+                <p class="pomodoro inactive">:</p>
+                <input tabindex="6" class="pomodoro inactive" id="timepd" type="number" placeholder=" second">
+
+                <!-- Check for choice -->
+                <p>Counter</p>
+                <p></p>
+                <label class="toggle" for="check">
+                    <input class="toggle__input" type="checkbox" id="check">
+                    <div class="toggle__fill"></div>
+                </label>
+                <p></p>
+                <p>Pomodoro</p>
+            </div>
+        </div>
+        <div class="button-group">
+            <button tabindex="7" class="Start" id="start">Start</button>
+            <button tabindex="8" class="End inactive" id="end">End</button>
+        </div>
+    </main>
+</body>
+</html>
