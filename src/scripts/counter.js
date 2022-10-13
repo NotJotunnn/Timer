@@ -5,6 +5,18 @@ const finish = document.getElementById('end')
 const clockValue = document.getElementById('clock')
 const checkValue = document.getElementById('check')
 const container = document.querySelector('.container')
+const btngroup = document.getElementById('button-group')
+
+const btn = document.getElementById('config-btn')
+const screen = document.getElementById('config')
+const icon = document.getElementById('iconbtn')
+const icon2 = document.getElementById('iconbtn2')
+
+// Ticking sound
+const hourradio = document.getElementById('hour')
+const minuteradio = document.getElementById('minute')
+const secondradio = document.getElementById('second')
+const noneradio = document.getElementById('none')
 
 // Css based declarations
 
@@ -16,9 +28,13 @@ let counter = 0
 let counterpd = 0
 var clockTime
 var boolean = false
+var selected = 'none'
+var lasthour
+var lastminute
 const pdcounters = []
-const DoneTune = new Audio('../assets/tunes/Apple pay .mp3')
-const back2Work = new Audio('../assets/tunes/Htc reactive.mp3')
+const DoneTune = new Audio('../assets/tunes/relax.wav')
+const back2Work = new Audio('../assets/tunes/work.wav')
+const tick = new Audio('../assets/tunes/tick.wav')
 
 // Get values for clock
 init.addEventListener('click', () => {
@@ -84,7 +100,11 @@ finish.addEventListener('click', () => {
     toggleClasses(init, 'inactive')
     toggleClasses(finish, 'inactive')
     toggleClasses(timeValueContainer, 'inactive')
-    if(isChecked) toggleClasses(container, 'large')
+    if(isChecked) {
+        toggleClasses(container, 'large') 
+        toggleClasses(btngroup, 'closer_large')
+    }
+    if(!isChecked) toggleClasses(btngroup, 'closer')
     clearArray(pdcounters)
     clearInterval(clockTime)
     clockValue.textContent = '00:00:00'
@@ -102,35 +122,52 @@ function clock(num) {
         toggleClasses(init, 'inactive')
         toggleClasses(finish, 'inactive')
         toggleClasses(timeValueContainer, 'inactive')
-        if(isChecked) toggleClasses(container, 'large')
+        if(isChecked) {
+            toggleClasses(container, 'large') 
+            toggleClasses(btngroup, 'closer_large')
+        }
+        if(!isChecked) toggleClasses(btngroup, 'closer')
     }
 
     // Starts the clock
     clockTime = setInterval(() => {
         
+        const hourIsChecked = hourradio.checked
+        const minuteIsChecked = minuteradio.checked
+        const secondIsChecked = secondradio.checked
+
         
         let hour = Math.floor(num / 3600)
         let minute = Math.floor(num / 60) % 60
         let second = Math.floor(num % 60)
         
         if(minute == 60) minute = 0
-        
+
+        if(hourIsChecked) if(lasthour != hour) tick.play()
+        if(minuteIsChecked) if(lastminute != minute) tick.play()
+        if(secondIsChecked) tick.play()
+
+        lasthour = hour
+        lastminute = minute
+
         
         clockValue.textContent = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`
         
         num--
 
+
         if(num < 0) {
             if(!isChecked) {
                 toggleClasses(init, 'inactive')
                 toggleClasses(finish, 'inactive')
+                toggleClasses(btngroup, 'closer')
                 toggleClasses(timeValueContainer, 'inactive')
                 clockValue.textContent = '00:00:00'
                 DoneTune.play()
                 clearInterval(clockTime)
             } else toggleModes()
         }
-    }, 100)
+    }, 1000)
 }
 
 // Push array items onto new Array
@@ -141,9 +178,9 @@ function pushArray(element, outputArray) {
 }
 
 function clearArray(array) {
-    array.forEach(element => {
+    for(i = 0; i < array.length + 1; i++) {
         array.pop()
-    });
+    }
 }
 
 // Changes mode when in pomodoro
@@ -170,7 +207,41 @@ function toggleModes() {
 function toggleClasses(element, classItem) {
     const check = element.classList.contains(classItem)
 
-    if(check) return element.classList.remove(classItem)
-
-    element.classList.add(classItem)
+    check ? element.classList.remove(classItem) : element.classList.add(classItem)
 }
+
+// Config tab
+
+// Initiates change
+btn.addEventListener('click', () => {
+    const isVisible = screen.classList.contains('viewable')
+    const isDark = icon.classList.contains('shift')
+
+    if(isVisible) screen.classList.remove('viewable')
+    else screen.classList.add('viewable')
+
+    if(isDark) {
+        icon.classList.remove('shift')
+        icon2.classList.add('shift')
+    }
+    else {
+        icon.classList.add('shift')
+        icon2.classList.remove('shift')
+    }
+})
+
+// Checks initial state
+function Start() {
+    const isDark = icon.classList.contains('shift')
+    if(!isDark) {
+        icon.classList.remove('shift')
+        icon2.classList.add('shift')
+    }
+    
+    else {
+        icon.classList.add('shift')
+        icon2.classList.remove('shift')
+    }
+}
+
+Start()

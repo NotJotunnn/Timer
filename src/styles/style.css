@@ -49,6 +49,19 @@ main {
 
 
 
+/* Top section */
+
+
+
+.top {
+    display: flex;
+    flex-direction: row-reverse;
+
+    width: 360px;
+    height: 60px;
+}
+
+
 
 /* Clock */
 
@@ -88,6 +101,20 @@ main {
     width: 275px;
 
     /* border: var(--debugger); */
+
+    position: relative;
+
+    transition: bottom 200ms;
+}
+
+.closer {
+    bottom: 60px;
+    transition: bottom 200ms;
+}
+
+.closer_large {
+    bottom: 73px;
+    transition: bottom 200ms;
 }
 
 .button-group > button {
@@ -224,3 +251,126 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 /* TODO: Better the visual */
+
+
+
+
+
+
+/* Configuration tab */
+
+
+
+
+
+.configuration_tab {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 55px;
+
+    height: 100vh;
+    width: 100%;
+
+    background-color: white;
+    color: black;
+
+    position: absolute;
+
+    translate: 3000px;
+    transition: ease-in-out 400ms;
+
+    z-index: 0;
+}
+
+.full_configuration {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+
+    width: 350px;
+
+    position: relative;
+
+    top: 50px;
+    right: 50px;
+}
+
+.container_configuration {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.label_container {
+    display: flex;
+
+    gap: 10px;
+}
+
+.black_border {
+    background-color: black;
+
+    width: 100%;
+    height: 5px;
+}
+
+.desc {
+    color: rgba(128, 128, 128, 0.312);
+}
+
+.viewable {
+    translate: 0;
+    transition: ease-in-out 400ms;
+}
+
+.btn {
+    display: flex;
+
+    background-color: rgba(0, 0, 0, 0);
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1;
+    
+    border: none;
+
+    width: 20px;
+    height: 20px;
+    scale: 180%;
+
+    transition: ease-in-out 400ms;
+
+    position: relative;
+
+    outline: none;
+
+    /* border: var(--debugger); */
+}
+
+.icon {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    fill: white;
+
+    opacity: 1;
+}
+
+.btn:hover, .btn:focus {
+    rotate: 90deg;
+}
+
+.shift {
+    opacity: 0;
+
+    transition: ease-in-out 400ms;
+}
