@@ -1,0 +1,22 @@
+{
+  "name": "timer",
+  "version": "1.0.0",
+  "description": "A timer that doubles as Pomodoro timer!",
+  "main": "src/electron/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NotJotunnn/Timer.git"
+  },
+  "author": "NotJotunnn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NotJotunnn/Timer/issues"
+  },
+  "homepage": "https://github.com/NotJotunnn/Timer#readme",
+  "devDependencies": {
+    "electron": "^21.1.1"
+  }
+}
